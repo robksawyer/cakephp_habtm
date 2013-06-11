@@ -33,7 +33,7 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 	 * Model-specific settings 
 	 * @var array 
 	 */ 
-	var $settings = array(); 
+	public $settings = array(); 
 	 
 	/** 
 	 * Setup 
@@ -42,7 +42,7 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 	 * @param unknown_type $model 
 	 * @param unknown_type $settings 
 	 */ 
-	function setup(&$model, $settings = array()) { 
+	public function setup(&$model, $settings = array()) { 
 		// no special setup required 
 		$this->settings[$model->name] = $settings; 
 	} 
@@ -56,15 +56,13 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 	 * @param mixed $assoc_ids 
 	 * @return boolean 
 	 */ 
-	function habtmAdd(&$model, $assoc, $id, $assoc_ids) { 
+	public function habtmAdd(&$model, $assoc, $id, $assoc_ids) { 
 		if(!is_array($assoc_ids)) { 
 			$assoc_ids = array($assoc_ids); 
-		} 
-		 
+		}
 		// make sure the association exists 
 		if(isset($model->hasAndBelongsToMany[$assoc])) { 
 			$data = $this->__habtmFind($model, $assoc, $id); 
-			 
 			// no data to update 
 			if(empty($data)) { 
 				return false; 
@@ -73,7 +71,7 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 			// important to use array_unique() since merging will add  
 			// non-unique values to the array. 
 			$data[$assoc][$assoc] = array_unique(am($data[$assoc][$assoc], $assoc_ids)); 
-			return $model->save($data, array('fieldList'=>array($assoc))); 
+			return $model->save($data, array('fieldList'=>array($assoc)));
 		} 
 		 
 		// association doesn't exist, return false 
@@ -89,7 +87,7 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 	 * @param mixed $assoc_ids 
 	 * @return boolean 
 	 */ 
-	function habtmDelete(&$model, $assoc, $id, $assoc_ids) { 
+	public function habtmDelete(&$model, $assoc, $id, $assoc_ids) { 
 		if(!is_array($assoc_ids)) { 
 			$assoc_ids = array($assoc_ids); 
 		} 
@@ -127,7 +125,7 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 	 * @param int $id 
 	 * @return boolean 
 	 */ 
-	function habtmDeleteAll(&$model, $assoc, $id) { 
+	public function habtmDeleteAll(&$model, $assoc, $id) { 
 		return $this->habtmDelete($model, $assoc, $id, '*'); 
 	} 
 	 
@@ -141,7 +139,7 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 	 * @param int $id 
 	 * @return array 
 	 */	 
-	function __habtmFind(&$model, $assoc, $id) { 
+	public function __habtmFind(&$model, $assoc, $id) { 
 		// temp holder for model-sensitive params 
 		$tmp_recursive = $model->recursive; 
 		$tmp_cacheQueries = $model->cacheQueries; 
@@ -176,7 +174,7 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 	 * @param Model $model 
 	 * @param array $exceptions 
 	 */ 
-	function unbindAll(&$model, $exceptions = array()) { 
+	public function unbindAll(&$model, $exceptions = array()) { 
 		$unbind = array(); 
 		foreach($model->_associations as $type) { 
 			foreach($model->$type as $assoc=>$assocData) { 
@@ -193,4 +191,3 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 		} 
 	} 
 } 
-
