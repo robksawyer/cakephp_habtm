@@ -30,33 +30,34 @@ App::uses('ModelBehavior', 'Model');
  * 
  */ 
 class ExtendAssociations2Behavior extends ModelBehavior { 
-	/** 
-	 * Model-specific settings 
-	 * @var array 
-	 */ 
+
+/** 
+ * Model-specific settings 
+ * @var array 
+ */ 
 	public $settings = array(); 
 	 
-	/** 
-	 * Setup 
-	 * Noething sp 
-	 * 
-	 * @param unknown_type $model 
-	 * @param unknown_type $settings 
-	 */ 
+/** 
+ * Setup 
+ * Noething sp 
+ * 
+ * @param unknown_type $model 
+ * @param unknown_type $settings 
+ */ 
 	public function setup(&$model, $settings = array()) { 
 		// no special setup required 
 		$this->settings[$model->name] = $settings; 
 	} 
 	 
-	/** 
-	 * Add an HABTM association 
-	 * 
-	 * @param Model $model 
-	 * @param string $assoc 
-	 * @param int $id 
-	 * @param mixed $assoc_ids 
-	 * @return boolean 
-	 */ 
+/** 
+ * Add an HABTM association 
+ * 
+ * @param Model $model 
+ * @param string $assoc 
+ * @param int $id 
+ * @param mixed $assoc_ids 
+ * @return boolean 
+ */ 
 	public function habtmAdd(&$model, $assoc, $id, $assoc_ids) { 
 		if(!is_array($assoc_ids)) { 
 			$assoc_ids = array($assoc_ids); 
@@ -79,15 +80,15 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 		return false; 
 	} 
 	 
-	/** 
-	 * Delete an HABTM Association 
-	 * 
-	 * @param Model $model 
-	 * @param string $assoc 
-	 * @param int $id 
-	 * @param mixed $assoc_ids 
-	 * @return boolean 
-	 */ 
+/** 
+ * Delete an HABTM Association 
+ * 
+ * @param Model $model 
+ * @param string $assoc 
+ * @param int $id 
+ * @param mixed $assoc_ids 
+ * @return boolean 
+ */ 
 	public function habtmDelete(&$model, $assoc, $id, $assoc_ids) { 
 		if(!is_array($assoc_ids)) { 
 			$assoc_ids = array($assoc_ids); 
@@ -117,29 +118,29 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 		return false; 
 	} 
 		 
-	/** 
-	 * Delete All HABTM Associations 
-	 * Just a nicer way to do easily delete all. 
-	 * 
-	 * @param Model $model 
-	 * @param string $assoc 
-	 * @param int $id 
-	 * @return boolean 
-	 */ 
+/** 
+ * Delete All HABTM Associations 
+ * Just a nicer way to do easily delete all. 
+ * 
+ * @param Model $model 
+ * @param string $assoc 
+ * @param int $id 
+ * @return boolean 
+ */ 
 	public function habtmDeleteAll(&$model, $assoc, $id) { 
 		return $this->habtmDelete($model, $assoc, $id, '*'); 
 	} 
 	 
-	/** 
-	 * Find  
-	 * This method allows cake to do the dirty work to  
-	 * fetch the current HABTM association. 
-	 * 
-	 * @param Model $model 
-	 * @param string $assoc 
-	 * @param int $id 
-	 * @return array 
-	 */	 
+/** 
+ * Find  
+ * This method allows cake to do the dirty work to  
+ * fetch the current HABTM association. 
+ * 
+ * @param Model $model 
+ * @param string $assoc 
+ * @param int $id 
+ * @return array 
+ */	 
 	public function __habtmFind(&$model, $assoc, $id) { 
 		// temp holder for model-sensitive params 
 		$tmp_recursive = $model->recursive; 
@@ -163,18 +164,18 @@ class ExtendAssociations2Behavior extends ModelBehavior {
 		return $data; 
 	} 
 	 
-	/** 
-	 * UnbindAll with Exceptions 
-	 * Allows you to quickly unbindAll of a model's  
-	 * associations with the exception of param 2. 
-	 * 
-	 * Usage: 
-	 *   $this->Model->unbindAll(); // unbinds ALL 
-	 *   $this->Model->unbindAll(array('hasMany' => array('Model2')) // unbind All except hasMany-Model2 
-	 *  
-	 * @param Model $model 
-	 * @param array $exceptions 
-	 */ 
+/** 
+ * UnbindAll with Exceptions 
+ * Allows you to quickly unbindAll of a model's  
+ * associations with the exception of param 2. 
+ * 
+ * Usage: 
+ *   $this->Model->unbindAll(); // unbinds ALL 
+ *   $this->Model->unbindAll(array('hasMany' => array('Model2')) // unbind All except hasMany-Model2 
+ *  
+ * @param Model $model 
+ * @param array $exceptions 
+ */ 
 	public function unbindAll(&$model, $exceptions = array()) { 
 		$unbind = array(); 
 		foreach($model->_associations as $type) { 
