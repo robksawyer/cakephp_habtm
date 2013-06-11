@@ -4,8 +4,9 @@ App::uses('ModelBehavior', 'Model');
  * Extend Associations Behavior 2
  *
  * Patched version of 'Extend Associations Behavior' which
- * works under CakePHP v2.0.x and up.
+ * works under CakePHP v2.x and up.
  *
+ * @update-author Rob Sawyer <robksawyer-at-gmail.com>
  * @patched-author Toshimasa Ishibashi <iandeth-at-gmail.com>
  * @web-page
  *
